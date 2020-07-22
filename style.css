@@ -1,0 +1,60 @@
+/* CSS files add styling rules to your content */
+
+:root {
+  --rows: repeat(3, 1fr);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+}
+
+main {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  font-size: 18px;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: var(--rows);
+  grid-template-rows: var(--rows);
+  height: 50vh;
+  width: 50vh;
+  border: solid black 2px;
+  margin-bottom: 1em;
+}
+
+#board div {
+  background: white;
+  font-size: 1em;
+  text-align: center;
+  position: relative;
+}
+
+#board div img {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+#board div:nth-child(odd) {
+  background: black;
+}
+
+.hidden {
+  display: none;
+}

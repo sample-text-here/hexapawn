@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hello!</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    <base target="_blank" />
+  </head>
+  <body>
+    <main>
+      <h1>Hexapawn</h1>
+      <span>
+        By
+        <a href="https://github.com/sample-text-here">
+          sample-text-here
+        </a></span
+      ><br />
+      <div id="board"></div>
+      <div>
+        <span id="wins">Games: 0 <br />You: 0 - AI: 0</span><br />
+        <button id="again" class="hidden">Play again</button>
+      </div>
+    </main>
+
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>

@@ -156,12 +156,19 @@ function decide() {
 }
 
 async function reset(won = false) {
+  let tmp = -1.5;
+  board.forEach((i, y) => {
+    i.forEach((j, x) => {
+      if (j === 1) tmp += 0.5;
+    });
+  });
+  score += tmp;
   if (won) score += 7;
   for (let n = 0; n < shortterm.length; n++) {
     for (let i in shortterm[n]) {
       if (!memory[n]) memory[n] = {};
       if (!memory[n].hasOwnProperty(i)) memory[n][i] = {};
-      for (let j in shortterm[i]) {
+      for (let j in shortterm[n][i]) {
         if (!memory[n][i].hasOwnProperty(j)) memory[n][i][j] = 3;
         memory[n][i][j] += Math.floor(score);
         if (memory[n][i][j] < 1) memory[n][i][j] = 1;
@@ -175,8 +182,8 @@ async function reset(won = false) {
   pointer = 0;
 
   gamedata.games++;
-  gamedata.you += won ? 1 : 0;
-  gamedata.ai += won ? 0 : 1;
+  gamedata.you += won ? 0 : 1;
+  gamedata.ai += won ? 1 : 0;
   $(
     "#wins"
   )[0].innerHTML = `Games: ${gamedata.games} <br />You: ${gamedata.you} - AI: ${gamedata.ai}`;
@@ -217,12 +224,18 @@ function init() {
     "--rows",
     "repeat(" + size + ", 1fr)"
   );
+  let flip = true,
+    flop;
   for (let i = 0; i < size; i++) {
+    flop = flip;
     for (let j = 0; j < size; j++) {
       let div = document.createElement("div");
       div.id = posToName(j, i);
+      if (flop) div.classList.add("black");
       $("#board")[0].appendChild(div);
+      flop = !flop;
     }
+    flip = !flip;
   }
   squares = $("#board div");
   squares.forEach((i, x) => {
@@ -242,8 +255,8 @@ function init() {
         if (isValid(...pos(selecting), ...pos(i.dataset.id))) {
           move(...pos(selecting), ...pos(i.dataset.id));
           if (checkWin() !== 0 || isStuck()) {
-            if (isStuck()) reset(true);
-            else reset(checkWin() < 0);
+            if (isStuck()) reset(false);
+            else reset(checkWin() > 0);
             uncolor();
             selecting = -1;
             return;
@@ -256,7 +269,7 @@ function init() {
           }
           if (checkWin() !== 0 || isStuck()) {
             if (isStuck()) reset(true);
-            else reset(checkWin() < 0);
+            else reset(checkWin() > 0);
           }
           drawboard();
           uncolor();
@@ -268,4 +281,8 @@ function init() {
   drawboard();
 }
 
-init();
+window.onload = init;
+
+$("#infobutton")[0].addEventListener("click", e => {
+  $("#info")[0].classList.toggle("hidden");
+});

@@ -51,10 +51,59 @@ main {
   cursor: pointer;
 }
 
-#board div:nth-child(odd) {
+#board div.black {
   background: black;
 }
 
 .hidden {
   display: none;
+}
+
+#infobutton {
+  position: fixed;
+  top: 2px;
+  left: 2px;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  border: solid #444 2px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+
+#infobutton:hover {
+  background: #444;
+  color: white;
+}
+
+#info {
+  position: fixed;
+  background: white;
+  padding: 1em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: -999px -999px 0 9999px #4444;
+  height: 60vh;
+  width: 60vh;
+  z-index: 999;
+}
+
+#infoclose {
+  font-size: 2em;
+  position: fixed;
+  top: -0.6em;
+  top: calc(-0.5em + 5px);
+  right: 5px;
+  color: red;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.center {
+  text-align: center;
+  font-size: 1.2em;
 }
